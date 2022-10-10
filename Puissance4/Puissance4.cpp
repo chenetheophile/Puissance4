@@ -3,9 +3,28 @@
 
 #include <SDL.h>
 #include <cstdlib>
+#include "Grille.h"
+#include <iostream>
+using namespace std;
 int main(int argc, char* argv[])
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    Grille grille;
+    int color;
+    int tour = 0;
+    while (true) {
+        if (tour%2== 0) color = 1;
+        else color = 0;
+        int colonne = -1;
+        grille.afficherGrille();
+        cout << "Entrez le numero de colonne" << endl << ">>";
+        cin >> colonne;
+        if (grille.ajouterPion(colonne, color)!=-1) {
+            cout << "Les pions " << color << " ont gagné!" << endl;
+            return 0;
+        };
+        tour++;
+    }
+   /* if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "[DEBUG] > %s", SDL_GetError());
         return EXIT_FAILURE;
@@ -31,12 +50,12 @@ int main(int argc, char* argv[])
                 break;
             }
         }
+
     }
     SDL_DestroyRenderer(pRenderer); SDL_DestroyWindow(pWindow);
-    SDL_Quit();
+    SDL_Quit();*/
     return EXIT_SUCCESS;
 }
-
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
 // Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
 
